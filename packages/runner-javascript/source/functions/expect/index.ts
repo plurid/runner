@@ -28,7 +28,7 @@ const expect = <V>(
                 throw messageText;
             }
             break;
-        case '<=':
+        case '<:':
             if (value > expected) {
                 throw messageText;
             }
@@ -38,7 +38,7 @@ const expect = <V>(
                 throw messageText;
             }
             break;
-        case '>=':
+        case '>:':
             if (value < expected) {
                 throw messageText;
             }

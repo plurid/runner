@@ -6,38 +6,49 @@
 
     import expect from '#functions/expect';
     import timeBenchmark from '#functions/timeBenchmark';
+
+    import {
+        time,
+    } from '#utilities/time';
     // #endregion external
 // #endregion imports
 
 
 
 // #region module
-const runner = async (
-    configuration: RunnerConfiguration,
-    fn: any,
+const runner = async <R>(
+    run: () => R | Promise<R>,
+    configuration: RunnerConfiguration<R>,
 ) => {
-    const start = Date.now();
-    const result = await fn();
-    const end = Date.now();
+    const start = time();
+    const result = await run();
+    const end = time();
 
-    expect(
-        // TODO
-        // extract the value from the result based on the configuration target
-        // loque.extract(
-        //     configuration.target,
-        //     result,
-        // ),
-        result,
-        configuration.expected,
-        configuration.comparison,
-    );
+    if (!configuration.timeless) {
+        timeBenchmark(
+            start,
+            end,
+            configuration?.time,
+            configuration?.name,
+        );
+    }
 
-    timeBenchmark(
-        start,
-        end,
-        configuration.time,
-        configuration.name,
-    );
+    if (configuration.expect) {
+        configuration.expect(result);
+    } else {
+        expect(
+            // TODO
+            // extract the value from the result based on the configuration target
+            // loque.extract(
+            //     configuration.target,
+            //     result,
+            // ),
+            result,
+            configuration.expected,
+            configuration?.comparison,
+            configuration?.message,
+        );
+    }
 }
 // #endregion module
 

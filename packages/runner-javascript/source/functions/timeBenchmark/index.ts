@@ -17,7 +17,7 @@
 const timeBenchmark = (
     start: number,
     end: number,
-    kind: RunnerTime,
+    kind: RunnerTime = 'instant',
     id?: string,
 ) => {
     const duration = end - start;

@@ -1,12 +1,16 @@
 // #region module
-interface RunnerConfiguration {
-    expected: any;
+interface RunnerConfiguration<E> {
+    expected: E;
     comparison?: RunnerComparison;
-    time: RunnerTime;
+    time?: RunnerTime;
+    timeless?: boolean;
     name?: string;
+    message?: string;
+
+    expect?: (result: E) => void;
 }
 
-type RunnerComparison = ':' | '<' | '<=' | '>' | '>=';
+type RunnerComparison = ':' | '<' | '<:' | '>' | '>:';
 type RunnerTime = 'instant' | 'fast' | 'network';
 // #endregion module
 
