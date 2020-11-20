@@ -11,7 +11,7 @@ interface RunnerConfiguration<E> {
 }
 
 type RunnerComparison = ':' | '<' | '<:' | '>' | '>:';
-type RunnerTime = 'instant' | 'fast' | 'network';
+type RunnerTime = 'instant' | 'fast' | 'network' | 'network-slow' | 'network-fast';
 // #endregion module
 
 
