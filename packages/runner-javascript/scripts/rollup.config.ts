@@ -39,6 +39,7 @@ const cli = {
         'commander',
         'os',
         'path',
+        'fs',
     ],
     plugins: [
         ...common.plugins,
