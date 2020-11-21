@@ -7,7 +7,7 @@
     // #region external
     import {
         isRunnerFile,
-    } from '#logics/general';
+    } from '#logics/collect';
 
     import {
         getFiles,
@@ -43,6 +43,10 @@ class Collector {
             if (isRunnerFile(file)) {
                 runnerFiles.push(file);
             }
+        }
+
+        for (const runnerFile of runnerFiles) {
+            console.log(runnerFile);
         }
     }
 }
