@@ -15,10 +15,12 @@ const run = async (
             runPath || process.cwd(),
         );
 
-        await collector.collect();
+        const runners = await collector.collect();
+        console.log(runners);
 
         return;
     } catch (error) {
+        console.log(`Could not find any runs in ${runPath}`);
         return;
     }
 }

@@ -12,13 +12,26 @@ const isRunnerFile = (
 ) => {
     const extension = path.extname(value);
     const runnerExtensioon = '.runner' + extension;
-    const re = new RegExp(`${runnerExtensioon}$`);
+    const runExtensioon = '.run' + extension;
+    const testExtension = '.test' + extension;
 
-    if (!value.match(re)) {
-        return false;
+    const runnerRegExp = new RegExp(`${runnerExtensioon}$`);
+    const runRegExp = new RegExp(`${runExtensioon}$`);
+    const testRegExp = new RegExp(`${testExtension}$`);
+
+    if (value.match(runnerRegExp)) {
+        return true;
     }
 
-    return true;
+    if (value.match(runRegExp)) {
+        return true;
+    }
+
+    if (value.match(testRegExp)) {
+        return true;
+    }
+
+    return false;
 }
 // #endregion module
 

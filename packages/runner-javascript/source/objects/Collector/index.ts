@@ -45,9 +45,7 @@ class Collector {
             }
         }
 
-        for (const runnerFile of runnerFiles) {
-            console.log(runnerFile);
-        }
+        return runnerFiles;
     }
 }
 // #endregion module

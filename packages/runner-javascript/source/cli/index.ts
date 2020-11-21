@@ -28,9 +28,12 @@ const main = async (
         .usage('[path]')
         .version('0.0.0', '-v, --version')
         .action(async (
-            path,
+            _,
+            args,
         ) => {
-            await run(path);
+            await run(
+                args ? args[0] : undefined
+            );
         });
 
 
