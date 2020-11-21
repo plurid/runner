@@ -1,11 +1,18 @@
 // #region imports
     // #region libraries
-    import {
-        promises as fs,
-    } from 'fs';
-
     import path from 'path';
     // #endregion libraries
+
+
+    // #region external
+    import {
+        isRunnerFile,
+    } from '#logics/general';
+
+    import {
+        getFiles,
+    } from '#utilities/general';
+    // #endregion external
 // #endregion imports
 
 
@@ -30,12 +37,13 @@ class Collector {
 
 
     public async collect() {
-        const isDirectory = (await fs.lstat(this.runnersPath)).isDirectory();
+        const runnerFiles: string[] = [];
 
-        const runnersDirectory = isDirectory
-            ? this.runnersPath
-            : path.dirname(this.runnersPath);
-
+        for await (const file of getFiles(this.runnersPath)) {
+            if (isRunnerFile(file)) {
+                runnerFiles.push(file);
+            }
+        }
     }
 }
 // #endregion module
