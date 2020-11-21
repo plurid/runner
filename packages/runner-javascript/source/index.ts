@@ -5,6 +5,8 @@
     import runner from '#functions/runner';
 
     import * as commands from '#commands/index';
+
+    import cli from './cli';
     // #endregion internal
 // #endregion imports
 
@@ -18,6 +20,8 @@ export {
     expect,
 
     commands,
+
+    cli,
 };
 
 export default runner;
