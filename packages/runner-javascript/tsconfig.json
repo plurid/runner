@@ -23,6 +23,12 @@
             "#logics/*": [
                 "./source/logics/*"
             ],
+            "#objects/*": [
+                "./source/objects/*"
+            ],
+            "#commands/*": [
+                "./source/commands/*"
+            ],
             "#utilities/*": [
                 "./source/utilities/*"
             ]
