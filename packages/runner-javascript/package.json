@@ -29,6 +29,9 @@
     "files": [
         "distribution"
     ],
+    "bin": {
+        "runner": "binder/runner"
+    },
     "scripts": {
         "test": "jest -c ./configurations/jest.config.js --coverage --verbose  ./source",
         "test.suite": "jest -c ./configurations/jest.config.js --coverage --verbose",
