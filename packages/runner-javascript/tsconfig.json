@@ -20,6 +20,9 @@
             "#functions/*": [
                 "./source/functions/*"
             ],
+            "#logics/*": [
+                "./source/logics/*"
+            ],
             "#utilities/*": [
                 "./source/utilities/*"
             ]
