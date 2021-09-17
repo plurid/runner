@@ -2,11 +2,15 @@
     // #region internal
     import expect from '~functions/expect';
     import timeBenchmark from '~functions/timeBenchmark';
-    import runner from '~functions/runner';
+    import timedRunner from '~functions/runner';
 
     import * as commands from '~commands/index';
 
     import cli from './cli';
+
+    import command from './callers/command';
+    import curl from './callers/curl';
+    import runner from './callers/runner';
     // #endregion internal
 // #endregion imports
 
@@ -22,7 +26,11 @@ export {
     commands,
 
     cli,
+
+    command,
+    curl,
+    runner,
 };
 
-export default runner;
+export default timedRunner;
 // #endregion exports
