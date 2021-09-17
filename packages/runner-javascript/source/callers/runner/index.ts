@@ -1,17 +1,25 @@
+// #region imports
+    // #region external
+    import {
+        RunnerOptions,
+        Check,
+        CheckTuple,
+    } from '~data/interfaces';
+
+    import {
+        SILENT_PASS,
+    } from '~data/constants';
+    // #endregion external
+// #endregion imports
+
+
+
 // #region module
-export type Check = (
-    testValue: any,
-    expectedValue: any,
-    relationship: string,
-) => void;
-
-export type CheckTuple = [any, any, string, boolean];
-
-
 const runner = async <P = any, R = any>(
     prepare: () => Promise<P>,
     run: (preparation: P, check: Check) => Promise<R>,
     postpare: (preparation: P, result: R) => Promise<void>,
+    options?: RunnerOptions,
 ) => {
     try {
         let checks: CheckTuple[] = [];
@@ -75,11 +83,20 @@ const runner = async <P = any, R = any>(
                 passed,
             ] = check;
 
-            if (passed) {
-                console.log(`test passed :: ${testValue.toString()} ${relationship} ${expectedValue.toString()}`)
-            } else {
-                console.log(`test failed :: ${testValue.toString()} not ${relationship} ${expectedValue.toString()}`)
+            if (
+                (options?.silentPass || SILENT_PASS)
+                && passed
+            ) {
+                return;
             }
+
+            const passedString = passed ? 'passed' : 'failed';
+            const notString = passed ? '' : 'not ';
+            const testValueString = testValue.toString();
+            const expectedValueString = expectedValue.toString();
+            const logString = `test ${passedString} :: ${testValueString} ${notString}${relationship} ${expectedValueString}`;
+
+            console.log(logString);
         }
     } catch (error) {
         console.log('runner error', error);
