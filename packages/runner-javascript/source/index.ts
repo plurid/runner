@@ -2,7 +2,7 @@
     // #region internal
     import expect from '~functions/expect';
     import timeBenchmark from '~functions/timeBenchmark';
-    import timedRunner from '~functions/runner';
+    import run from '~functions/runner';
 
     import * as commands from '~commands/index';
 
@@ -32,5 +32,5 @@ export {
     runner,
 };
 
-export default timedRunner;
+export default run;
 // #endregion exports
