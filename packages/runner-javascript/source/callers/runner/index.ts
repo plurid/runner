@@ -1,7 +1,7 @@
 // #region imports
     // #region external
     import {
-        RunnerOptions,
+        Runner,
         Check,
         CheckRelationship,
         CheckRecord,
@@ -16,11 +16,11 @@
 
 
 // #region module
-const runner = async <P = any, R = any>(
-    prepare: (check: Check) => Promise<P>,
-    run: (preparation: P, check: Check) => Promise<R>,
-    postpare: (preparation: P, result: R, check: Check) => Promise<void>,
-    options?: RunnerOptions,
+const runner: Runner = async (
+    prepare,
+    run,
+    postpare,
+    options,
 ) => {
     try {
         let checks: CheckRecord[] = [];
