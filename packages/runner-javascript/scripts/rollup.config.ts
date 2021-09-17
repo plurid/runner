@@ -21,7 +21,7 @@ const common = {
             tsconfig: './tsconfig.json',
         }),
         commonjs(),
-    ]
+    ],
 };
 
 

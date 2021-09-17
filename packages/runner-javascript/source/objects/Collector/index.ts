@@ -7,11 +7,11 @@
     // #region external
     import {
         isRunnerFile,
-    } from '#logics/collect';
+    } from '~logics/collect';
 
     import {
         getFiles,
-    } from '#utilities/general';
+    } from '~utilities/general';
     // #endregion external
 // #endregion imports
 

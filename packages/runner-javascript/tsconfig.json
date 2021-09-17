@@ -14,22 +14,22 @@
 
         "baseUrl": ".",
         "paths": {
-            "#data/*": [
+            "~data/*": [
                 "./source/data/*"
             ],
-            "#functions/*": [
+            "~functions/*": [
                 "./source/functions/*"
             ],
-            "#logics/*": [
+            "~logics/*": [
                 "./source/logics/*"
             ],
-            "#objects/*": [
+            "~objects/*": [
                 "./source/objects/*"
             ],
-            "#commands/*": [
+            "~commands/*": [
                 "./source/commands/*"
             ],
-            "#utilities/*": [
+            "~utilities/*": [
                 "./source/utilities/*"
             ]
         },

@@ -2,14 +2,14 @@
     // #region external
     import {
         RunnerConfiguration,
-    } from '#data/interfaces';
+    } from '~data/interfaces';
 
-    import expect from '#functions/expect';
-    import timeBenchmark from '#functions/timeBenchmark';
+    import expect from '~functions/expect';
+    import timeBenchmark from '~functions/timeBenchmark';
 
     import {
         time,
-    } from '#utilities/time';
+    } from '~utilities/time';
     // #endregion external
 // #endregion imports
 

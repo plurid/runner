@@ -1,6 +1,6 @@
 // #region imports
     // #region external
-    import Collector from '#objects/Collector';
+    import Collector from '~objects/Collector';
     // #endregion external
 // #endregion imports
 

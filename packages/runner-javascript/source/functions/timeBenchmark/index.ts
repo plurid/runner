@@ -3,11 +3,11 @@
     import {
         timeBenchmarkValues,
         timeTolerance,
-    } from '#data/constants';
+    } from '~data/constants';
 
     import {
         RunnerTime,
-    } from '#data/interfaces';
+    } from '~data/interfaces';
     // #endregion external
 // #endregion imports
 

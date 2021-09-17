@@ -1,15 +1,13 @@
 // #region imports
     // #region libraries
-    import program, {
-        CommanderStatic,
-    } from 'commander';
+    import program from 'commander';
     // #endregion libraries
 
 
     // #region external
     import {
         run,
-    } from '#commands/index';
+    } from '~commands/index';
     // #endregion external
 // #endregion imports
 
@@ -17,7 +15,7 @@
 
 // #region module
 const main = async (
-    program: CommanderStatic,
+    program: any,
 ) => {
     program
         .storeOptionsAsProperties(false)
@@ -26,7 +24,7 @@ const main = async (
     program
         .name('runner')
         .usage('[path]')
-        .version('0.0.0', '-v, --version')
+        .version('0.0.0-0', '-v, --version')
         .action(async (
             _,
             args,

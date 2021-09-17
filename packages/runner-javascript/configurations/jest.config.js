@@ -18,11 +18,14 @@ module.exports = {
         'source',
     ],
     moduleNameMapper: {
-        "#cli/(.*)": "<rootDir>/source/cli/$1",
-        "#commands/(.*)": "<rootDir>/source/commands/$1",
-        "#data/(.*)": "<rootDir>/source/data/$1",
-        "#objects/(.*)": "<rootDir>/source/objects/$1",
-        "#services/(.*)": "<rootDir>/source/services/$1",
+        "~cli/(.*)": "<rootDir>/source/cli/$1",
+        "~commands/(.*)": "<rootDir>/source/commands/$1",
+        "~data/(.*)": "<rootDir>/source/data/$1",
+        "~functions/(.*)": "<rootDir>/source/functions/$1",
+        "~logics/(.*)": "<rootDir>/source/logics/$1",
+        "~objects/(.*)": "<rootDir>/source/objects/$1",
+        "~commands/(.*)": "<rootDir>/source/commands/$1",
+        "~utilities/(.*)": "<rootDir>/source/utilities/$1",
     },
     collectCoverage: true,
     coveragePathIgnorePatterns: [
@@ -40,10 +43,10 @@ module.exports = {
             // functions: 95,
             // lines: 95,
             // statements: 95
-        }
+        },
     },
     collectCoverageFrom: [
         'source/*.{js,ts}'
     ],
-    testTimeout: 30000
+    testTimeout: 30000,
 }
