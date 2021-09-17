@@ -1,6 +1,9 @@
 // #region imports
     // #region libraries
-    import program from 'commander';
+    import {
+        program,
+        Command,
+    } from 'commander';
     // #endregion libraries
 
 
@@ -15,11 +18,10 @@
 
 // #region module
 const main = async (
-    program: any,
+    program: Command,
 ) => {
     program
-        .storeOptionsAsProperties(false)
-        .passCommandToAction(false);
+        .storeOptionsAsProperties(false);
 
     program
         .name('runner')
