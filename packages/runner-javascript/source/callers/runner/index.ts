@@ -3,7 +3,8 @@
     import {
         RunnerOptions,
         Check,
-        CheckTuple,
+        CheckRelationship,
+        CheckRecord,
     } from '~data/interfaces';
 
     import {
@@ -16,18 +17,19 @@
 
 // #region module
 const runner = async <P = any, R = any>(
-    prepare: () => Promise<P>,
+    prepare: (check: Check) => Promise<P>,
     run: (preparation: P, check: Check) => Promise<R>,
-    postpare: (preparation: P, result: R) => Promise<void>,
+    postpare: (preparation: P, result: R, check: Check) => Promise<void>,
     options?: RunnerOptions,
 ) => {
     try {
-        let checks: CheckTuple[] = [];
+        let checks: CheckRecord[] = [];
 
         const check: Check = (
             testValue: any,
             expectedValue: any,
-            relationship: string = '==',
+            relationship: CheckRelationship = '==',
+            message: string = '',
         ) => {
             let passed = false;
 
@@ -61,27 +63,29 @@ const runner = async <P = any, R = any>(
                     break;
             }
 
-            checks.push([
+            checks.push({
                 testValue,
                 expectedValue,
                 relationship,
                 passed,
-            ]);
+                message,
+            });
         }
 
 
-        const preparation = await prepare();
+        const preparation = await prepare(check);
         const result = await run(preparation, check);
-        await postpare(preparation, result);
+        await postpare(preparation, result, check);
 
 
         for (const check of checks) {
-            const [
+            const {
                 testValue,
                 expectedValue,
                 relationship,
                 passed,
-            ] = check;
+                message,
+            } = check;
 
             if (
                 (options?.silentPass || SILENT_PASS)
@@ -94,7 +98,11 @@ const runner = async <P = any, R = any>(
             const notString = passed ? '' : 'not ';
             const testValueString = testValue.toString();
             const expectedValueString = expectedValue.toString();
-            const logString = `test ${passedString} :: ${testValueString} ${notString}${relationship} ${expectedValueString}`;
+            const messageString = message
+                ? ` :: ${message.toString()}`
+                : '';
+
+            const logString = `test ${passedString} :: ${testValueString} ${notString}${relationship} ${expectedValueString}${messageString}`;
 
             console.log(logString);
         }

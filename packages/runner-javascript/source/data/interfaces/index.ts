@@ -18,10 +18,20 @@ type RunnerTime = 'instant' | 'fast' | 'network' | 'network-slow' | 'network-fas
 export type Check = (
     testValue: any,
     expectedValue: any,
-    relationship: string,
+    relationship: CheckRelationship,
+    message: string | undefined,
 ) => void;
 
-export type CheckTuple = [any, any, string, boolean];
+export type CheckRecord = {
+    testValue: any;
+    expectedValue: any;
+    relationship: CheckRelationship;
+    passed: boolean;
+    message: string | undefined;
+}
+
+export type CheckRelationship =
+    | '==' | '<' | '<=' | '>' | '>=';
 
 export interface RunnerOptions {
     silentPass?: boolean;
