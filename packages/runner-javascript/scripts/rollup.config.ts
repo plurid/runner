@@ -3,6 +3,7 @@
     import commonjs from '@rollup/plugin-commonjs';
     import typescript from 'rollup-plugin-typescript2';
     import json from '@rollup/plugin-json';
+    import { terser } from 'rollup-plugin-terser';
     // #endregion libraries
 
 
@@ -17,10 +18,18 @@
 const common = {
     plugins: [
         json(),
+        commonjs(),
         typescript({
             tsconfig: './tsconfig.json',
         }),
-        commonjs(),
+        terser({
+            mangle: false,
+            compress: false,
+            format: {
+                beautify: true,
+                comments: false,
+            },
+        }),,
     ],
 };
 
@@ -35,11 +44,12 @@ const cli = {
         },
     ],
     external: [
-        '@plurid/deon',
-        'commander',
         'os',
         'path',
         'fs',
+        'child_process',
+
+        'commander',
     ],
     plugins: [
         ...common.plugins,
