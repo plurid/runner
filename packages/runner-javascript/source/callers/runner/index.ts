@@ -11,6 +11,9 @@
 
     import {
         SILENT_PASS,
+
+        MAGENTA_BACKGROUND,
+        RED_BACKGROUND,
     } from '~data/constants';
     // #endregion external
 // #endregion imports
@@ -76,23 +79,25 @@ const runner: Runner = async (
 
 
         let defined = false;
-
         if (!run && !postpare) {
             defined = true;
+        } else if (run && postpare) {
+            defined = true;
+        }
+        if (!defined) {
+            console.log(`runner requires one or three functions, 'run' or 'prepare, run, postpare'`);
+            return;
+        }
 
+
+        if (!run && !postpare) {
             const run = prepareOrRun as RunnerRun<any, any>;
             await run(check);
         } else if (run && postpare) {
-            defined = true;
-
             const prepare = prepareOrRun as RunnerPrepare<any>;
             const preparation = await prepare(check);
             const result = await run(check, preparation);
             await postpare(check, preparation, result);
-        }
-
-        if (!defined) {
-            console.log(`runner requires one or three functions, 'run' or 'prepare, run, postpare'`);
         }
 
 
@@ -120,12 +125,17 @@ const runner: Runner = async (
                 ? ` :: ${message.toString()}`
                 : '';
 
-            const logString = `test ${passedString} :: ${testValueString} ${notString}${relationship} ${expectedValueString}${messageString}`;
+            const colors = passed
+                ? MAGENTA_BACKGROUND
+                : RED_BACKGROUND;
 
-            console.log(logString);
+            const runString = `run ${passedString}`;
+            const logString = `:: ${testValueString} ${notString}${relationship} ${expectedValueString}${messageString}`;
+
+            console.log(colors, runString, logString);
         }
     } catch (error) {
-        console.log('runner error', error);
+        console.log('run error', error);
         return;
     }
 }
