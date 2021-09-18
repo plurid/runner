@@ -11,6 +11,10 @@
     import {
         run,
     } from '~commands/index';
+
+    import {
+        VERSION,
+    } from '~data/constants';
     // #endregion external
 // #endregion imports
 
@@ -26,7 +30,7 @@ const main = async (
     program
         .name('runner')
         .usage('[path]')
-        .version('0.0.0-0', '-v, --version')
+        .version(VERSION, '-v, --version')
         .action(async (
             _,
             options,

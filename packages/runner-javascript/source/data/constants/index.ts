@@ -18,4 +18,8 @@ export const SILENT_PASS = process.env.RUNNER_SILENT_PASS === 'true';
 
 export const MAGENTA_BACKGROUND = '\x1b[45m%s\x1b[0m';
 export const RED_BACKGROUND = '\x1b[41m%s\x1b[0m';
+
+
+
+export const VERSION = '0.0.0-5';
 // #endregion module
