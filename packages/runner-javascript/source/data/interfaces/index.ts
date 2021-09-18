@@ -38,10 +38,14 @@ export interface RunnerOptions {
 }
 
 
+export type RunnerPrepare<P> = (check: Check) => Promise<P>;
+export type RunnerRun<P, R> = (check: Check, preparation: P) => Promise<R>;
+export type RunnerPostPare<P, R> = (check: Check, preparation: P, result: R) => Promise<void>;
+
 export type Runner = <P = any, R = any>(
-    prepare: (check: Check) => Promise<P>,
-    run: (preparation: P, check: Check) => Promise<R>,
-    postpare: (preparation: P, result: R, check: Check) => Promise<void>,
+    prepareOrRun: RunnerPrepare<P> | RunnerRun<P, R>,
+    run?: RunnerRun<P, R>,
+    postpare?: RunnerPostPare<P, R>,
     options?: RunnerOptions,
 ) => Promise<void>;
 // #endregion module

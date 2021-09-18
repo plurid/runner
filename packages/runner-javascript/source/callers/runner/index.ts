@@ -2,6 +2,8 @@
     // #region external
     import {
         Runner,
+        RunnerPrepare,
+        RunnerRun,
         Check,
         CheckRelationship,
         CheckRecord,
@@ -17,7 +19,7 @@
 
 // #region module
 const runner: Runner = async (
-    prepare,
+    prepareOrRun,
     run,
     postpare,
     options,
@@ -73,9 +75,25 @@ const runner: Runner = async (
         }
 
 
-        const preparation = await prepare(check);
-        const result = await run(preparation, check);
-        await postpare(preparation, result, check);
+        let defined = false;
+
+        if (!run && !postpare) {
+            defined = true;
+
+            const run = prepareOrRun as RunnerRun<any, any>;
+            await run(check);
+        } else if (run && postpare) {
+            defined = true;
+
+            const prepare = prepareOrRun as RunnerPrepare<any>;
+            const preparation = await prepare(check);
+            const result = await run(check, preparation);
+            await postpare(check, preparation, result);
+        }
+
+        if (!defined) {
+            console.log(`runner requires one or three functions, 'run' or 'prepare, run, postpare'`);
+        }
 
 
         for (const check of checks) {
