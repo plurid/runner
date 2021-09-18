@@ -1,16 +1,13 @@
 // #region imports
     // #region internal
-    import expect from '~functions/expect';
-    import timeBenchmark from '~functions/timeBenchmark';
-    import run from '~functions/runner';
-
     import * as commands from '~commands/index';
 
     import cli from './cli';
 
-    import command from './callers/command';
-    import curl from './callers/curl';
-    import runner from './callers/runner';
+    import command from '~functions/command';
+    import curl from '~functions/curl';
+
+    import runner from '~functions/runner';
     // #endregion internal
 // #endregion imports
 
@@ -20,17 +17,13 @@
 export * from '~data/interfaces';
 
 export {
-    timeBenchmark,
-    expect,
-
     commands,
 
     cli,
 
     command,
     curl,
-    runner,
 };
 
-export default run;
+export default runner;
 // #endregion exports

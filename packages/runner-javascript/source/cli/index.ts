@@ -21,7 +21,7 @@ const main = async (
     program: Command,
 ) => {
     program
-        .storeOptionsAsProperties(false);
+        .storeOptionsAsProperties(true);
 
     program
         .name('runner')
@@ -29,15 +29,17 @@ const main = async (
         .version('0.0.0-0', '-v, --version')
         .action(async (
             _,
-            args,
+            options,
         ) => {
             await run(
-                args ? args[0] : undefined
+                options.args[0],
             );
         });
 
 
-    program.parseAsync(process.argv);
+    program.parseAsync(
+        process.argv,
+    );
 }
 
 
