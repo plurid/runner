@@ -31,10 +31,10 @@ const runner: Runner = async (
         let checks: CheckRecord[] = [];
 
         const check = (mode: string): Check => (
+            message: string = '',
             testValue: any,
             expectedValue: any,
             relationship: CheckRelationship = '==',
-            message: string = '',
         ) => {
             let passed = false;
 
