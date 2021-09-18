@@ -30,7 +30,7 @@ const runner: Runner = async (
     try {
         let checks: CheckRecord[] = [];
 
-        const check: Check = (
+        const check = (mode: string): Check => (
             testValue: any,
             expectedValue: any,
             relationship: CheckRelationship = '==',
@@ -74,30 +74,23 @@ const runner: Runner = async (
                 relationship,
                 passed,
                 message,
+                mode,
             });
         }
 
 
-        let defined = false;
-        if (!run && !postpare) {
-            defined = true;
-        } else if (run && postpare) {
-            defined = true;
-        }
-        if (!defined) {
-            console.log(`runner requires one or three functions, 'run' or 'prepare, run, postpare'`);
-            return;
-        }
-
-
-        if (!run && !postpare) {
+        if (!run) {
             const run = prepareOrRun as RunnerRun<any, any>;
-            await run(check);
-        } else if (run && postpare) {
+
+            await run(check('run'));
+        } else {
             const prepare = prepareOrRun as RunnerPrepare<any>;
-            const preparation = await prepare(check);
-            const result = await run(check, preparation);
-            await postpare(check, preparation, result);
+
+            const preparation = await prepare(check('prepare'));
+            const result = await run(check('run'), preparation);
+            if (postpare) {
+                await postpare(check('postpare'), preparation, result);
+            }
         }
 
 
@@ -108,6 +101,7 @@ const runner: Runner = async (
                 relationship,
                 passed,
                 message,
+                mode,
             } = check;
 
             if (
@@ -119,20 +113,23 @@ const runner: Runner = async (
 
             const passedString = passed ? 'passed' : 'failed';
             const notString = passed ? '' : 'not ';
-            const testValueString = testValue.toString();
-            const expectedValueString = expectedValue.toString();
+            const testValueString = typeof testValue === 'string'
+                ? `'${testValue}'`
+                : testValue.toString();
+            const expectedValueString = typeof expectedValue === 'string'
+                ? `'${expectedValue}'`
+                : expectedValue.toString();
             const messageString = message
-                ? ` :: ${message.toString()}`
+                ? `:: ${message.toString()} `
                 : '';
 
             const colors = passed
                 ? MAGENTA_BACKGROUND
                 : RED_BACKGROUND;
+            const modeString = `${mode} ${passedString}`;
+            const logString = `${messageString}:: ${testValueString} ${notString}${relationship} ${expectedValueString}`;
 
-            const runString = `run ${passedString}`;
-            const logString = `:: ${testValueString} ${notString}${relationship} ${expectedValueString}${messageString}`;
-
-            console.log(colors, runString, logString);
+            console.log(colors, modeString, logString);
         }
     } catch (error) {
         console.log('run error', error);

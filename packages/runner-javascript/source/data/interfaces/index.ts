@@ -16,10 +16,10 @@ type RunnerTime = 'instant' | 'fast' | 'network' | 'network-slow' | 'network-fas
 
 
 export type Check = (
+    message: string,
     testValue: any,
     expectedValue: any,
     relationship: CheckRelationship,
-    message: string | undefined,
 ) => void;
 
 export type CheckRecord = {
@@ -28,6 +28,7 @@ export type CheckRecord = {
     relationship: CheckRelationship;
     passed: boolean;
     message: string | undefined;
+    mode: string;
 }
 
 export type CheckRelationship =
