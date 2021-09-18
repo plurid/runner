@@ -39,7 +39,7 @@ export interface RunnerOptions {
 
 
 export type RunnerPrepare<P> = (check: Check) => Promise<P>;
-export type RunnerRun<P, R> = (check: Check, preparation: P) => Promise<R>;
+export type RunnerRun<P, R> = (check: Check, preparation?: P) => Promise<R>;
 export type RunnerPostPare<P, R> = (check: Check, preparation: P, result: R) => Promise<void>;
 
 export type Runner = <P = any, R = any>(
