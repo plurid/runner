@@ -1,21 +1,25 @@
-import runner from '../distribution';
+import runner, {
+    RunnerPrepare,
+    RunnerPostpare,
+    RunnerRun,
+} from '../distribution';
 
 
 
-const prepare = async (
+const prepare: RunnerPrepare = async (
     check,
 ) => {
     check('works', true, true);
 }
 
-const run = async (
+const run: RunnerRun = async (
     check,
     prepared,
 ) => {
     check('works', true, true);
 }
 
-const postpare = async (
+const postpare: RunnerPostpare = async (
     check,
     prepared,
     runned,
