@@ -86,10 +86,10 @@ const runner: Runner = async (
         } else {
             const prepare = prepareOrRun as RunnerPrepare<any>;
 
-            const preparation = await prepare(check('prepare'));
-            const result = await run(check('run'), preparation);
+            const prepared = await prepare(check('prepare'));
+            const runned = await run(check('run'), prepared);
             if (postpare) {
-                await postpare(check('postpare'), preparation, result);
+                await postpare(check('postpare'), prepared, runned);
             }
         }
 

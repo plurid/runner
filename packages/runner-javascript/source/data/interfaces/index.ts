@@ -2,13 +2,13 @@
 export type Runner = <P = any, R = any>(
     prepareOrRun: RunnerPrepare<P> | RunnerRun<P, R>,
     run?: RunnerRun<P, R>,
-    postpare?: RunnerPostPare<P, R>,
+    postpare?: RunnerPostpare<P, R>,
     options?: RunnerOptions,
 ) => Promise<void>;
 
-export type RunnerPrepare<P> = (check: Check) => Promise<P>;
-export type RunnerRun<P, R> = (check: Check, preparation?: P) => Promise<R>;
-export type RunnerPostPare<P, R> = (check: Check, preparation: P, result: R) => Promise<void>;
+export type RunnerPrepare<P = any> = (check: Check) => Promise<P>;
+export type RunnerRun<P = any, R = any> = (check: Check, prepared?: P) => Promise<R>;
+export type RunnerPostpare<P = any, R = any> = (check: Check, prepared: P, runned: R) => Promise<void>;
 export interface RunnerOptions {
     silentPass?: boolean;
 }
@@ -18,7 +18,7 @@ export type Check = (
     message: string,
     testValue: any,
     expectedValue: any,
-    relationship: CheckRelationship,
+    relationship?: CheckRelationship,
 ) => void;
 
 export type CheckRecord = {
