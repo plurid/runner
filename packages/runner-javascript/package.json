@@ -1,10 +1,13 @@
 {
     "name": "@plurid/runner",
     "version": "0.0.0-8",
-    "description": "Test Runner",
+    "description": "Test Runner with Preparation/Postparation Stages",
     "keywords": [
         "test",
-        "runner"
+        "runner",
+        "prepare",
+        "run",
+        "postpare"
     ],
     "author": "ly3xqhl8g9 <ly3xqhl8g9@plurid.com> (https://plurid.com)",
     "license": "SEE LICENSE IN LICENSE",
