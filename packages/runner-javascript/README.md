@@ -116,6 +116,30 @@ runner(
 );
 ```
 
+To execute the runners use the `runner` cli
+
+``` bash
+runner /path/to/test/file/or/folder
+```
+
+Running the example `runner` will log similar to the following
+
+``` bash
+prepare passed :: example · works :: 0.15412422456759045 < 0.5
+prepare passed :: example · works :: true == true
+run passed :: example · works :: true == true
+postpare passed :: example · works :: true == true
+postpare failed :: example · works :: false not == true
+
+or
+
+prepare failed :: example · works :: 0.7123851592649375 not < 0.5
+prepare failed :: example · works :: false not == true
+run failed :: example · works :: false not == true
+postpare failed :: example · works :: false not == true
+postpare failed :: example · works :: false not == true
+```
+
 The `prepare` and `postpare` are meant for setting up and tearing down the environment in which the `run` will execute.
 
 The results of `prepare` are passed to `run`, and the results of `prepare` and `run` are passed to `postpare`.
@@ -136,12 +160,6 @@ export type Check = (
 
 export type CheckRelationship =
     | '==' | '<' | '<=' | '>' | '>=';
-```
-
-To execute the runners use the `runner` cli
-
-``` bash
-runner /path/to/test/file/or/folder
 ```
 
 
