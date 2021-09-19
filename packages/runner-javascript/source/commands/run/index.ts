@@ -37,6 +37,9 @@ const collectAndRun = async (
                     esrun.stdout?.on('data', (data) => {
                         console.log(data);
                     });
+                    esrun.stderr?.on('data', (data) => {
+                        console.log(data);
+                    });
                 } else {
                     require(
                         runner,
