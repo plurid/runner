@@ -3,6 +3,6 @@ const runner = require('../distribution').default;
 
 runner(
     (check) => {
-        check('simple', true, true);
+        check('simple · works', true, true);
     },
 );

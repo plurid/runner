@@ -17,7 +17,7 @@ interface Runned {
 const prepare: RunnerPrepare<Prepared> = async (
     check,
 ) => {
-    check('works', true, true);
+    check('example · works', true, true);
 
     return {
         prepareData: true
@@ -28,7 +28,7 @@ const run: RunnerRun<Prepared, Runned> = async (
     check,
     prepared,
 ) => {
-    check('works', true, true);
+    check('example · works', true, true);
 
     return {
         runData: false,
@@ -40,7 +40,7 @@ const postpare: RunnerPostpare<Prepared, Runned> = async (
     prepared,
     runned,
 ) => {
-    check('works', true, true);
+    check('example · works', true, true);
 }
 
 
