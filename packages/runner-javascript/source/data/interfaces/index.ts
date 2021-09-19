@@ -19,7 +19,7 @@ export type Check = (
     testValue: any,
     expectedValue: any,
     relationship?: CheckRelationship,
-) => void;
+) => boolean;
 
 export type CheckRecord = {
     testValue: any;

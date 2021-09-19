@@ -76,6 +76,8 @@ const runner: Runner = async (
                 message,
                 mode,
             });
+
+            return passed;
         }
 
 
