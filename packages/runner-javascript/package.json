@@ -40,17 +40,20 @@
         "clean": "rm -rf distribution",
         "start": "rollup -c ./scripts/rollup.config.ts -w",
         "build.clean": "rm -rf `find ./distribution/ -type d -name __tests__`",
-        "build.development": "rollup -c ./scripts/rollup.config.ts && yarn build.clean",
-        "build": "rollup -c ./scripts/rollup.config.ts && yarn build.clean",
+        "build.development": "rollup -c ./scripts/rollup.config.js",
         "prebuild": "yarn clean",
+        "build": "NODE_ENV=production rollup -c ./scripts/rollup.config.js && yarn build.clean",
         "prepublishOnly": "yarn build"
     },
     "dependencies": {
-        "commander": "^8.2.0"
+        "@balsamic/esrun": "^0.0.27",
+        "commander": "^8.2.0",
+        "esbuild": "^0.12.28"
     },
     "devDependencies": {
         "@rollup/plugin-commonjs": "^20.0.0",
         "@rollup/plugin-json": "^4.1.0",
+        "@rollup/plugin-replace": "^3.0.0",
         "@types/node": "^16.9.2",
         "@typescript-eslint/eslint-plugin": "^4.31.1",
         "@typescript-eslint/parser": "^4.31.1",
