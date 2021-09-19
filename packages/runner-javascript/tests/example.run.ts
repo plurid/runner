@@ -17,8 +17,10 @@ interface Runned {
 const prepare: RunnerPrepare<Prepared> = async (
     check,
 ) => {
-    const data = Math.random() < 0.5;
+    const value = Math.random();
+    check('example · works', value, 0.5, '<');
 
+    const data = value < 0.5;
     check('example · works', data, true);
 
     return {
