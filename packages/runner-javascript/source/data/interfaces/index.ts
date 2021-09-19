@@ -1,18 +1,17 @@
 // #region module
-interface RunnerConfiguration<E> {
-    expected: E;
-    comparison?: RunnerComparison;
-    time?: RunnerTime;
-    timeless?: boolean;
-    name?: string;
-    message?: string;
+export type Runner = <P = any, R = any>(
+    prepareOrRun: RunnerPrepare<P> | RunnerRun<P, R>,
+    run?: RunnerRun<P, R>,
+    postpare?: RunnerPostPare<P, R>,
+    options?: RunnerOptions,
+) => Promise<void>;
 
-    expect?: (result: E) => void;
+export type RunnerPrepare<P> = (check: Check) => Promise<P>;
+export type RunnerRun<P, R> = (check: Check, preparation?: P) => Promise<R>;
+export type RunnerPostPare<P, R> = (check: Check, preparation: P, result: R) => Promise<void>;
+export interface RunnerOptions {
+    silentPass?: boolean;
 }
-
-type RunnerComparison = ':' | '<' | '<:' | '>' | '>:';
-type RunnerTime = 'instant' | 'fast' | 'network' | 'network-slow' | 'network-fast';
-
 
 
 export type Check = (
@@ -34,29 +33,11 @@ export type CheckRecord = {
 export type CheckRelationship =
     | '==' | '<' | '<=' | '>' | '>=';
 
-export interface RunnerOptions {
-    silentPass?: boolean;
-}
 
-
-export type RunnerPrepare<P> = (check: Check) => Promise<P>;
-export type RunnerRun<P, R> = (check: Check, preparation?: P) => Promise<R>;
-export type RunnerPostPare<P, R> = (check: Check, preparation: P, result: R) => Promise<void>;
-
-export type Runner = <P = any, R = any>(
-    prepareOrRun: RunnerPrepare<P> | RunnerRun<P, R>,
-    run?: RunnerRun<P, R>,
-    postpare?: RunnerPostPare<P, R>,
-    options?: RunnerOptions,
-) => Promise<void>;
+export type RunnerTime =
+    | 'instant'
+    | 'fast'
+    | 'network'
+    | 'network-slow'
+    | 'network-fast';
 // #endregion module
-
-
-
-// #region exports
-export {
-    RunnerConfiguration,
-    RunnerComparison,
-    RunnerTime,
-};
-// #endregion exports
