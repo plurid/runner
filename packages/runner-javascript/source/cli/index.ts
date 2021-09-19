@@ -29,14 +29,14 @@ const main = async (
 
     program
         .name('runner')
-        .usage('[path]')
+        .usage('[...path]')
         .version(VERSION, '-v, --version')
         .action(async (
             _,
             options,
         ) => {
             await run(
-                options.args[0],
+                options.args || [],
             );
         });
 

@@ -19,9 +19,9 @@ export const isRunnerFile = (
 ) => {
     const extension = path.extname(value);
 
-    for (const value of runnerExtensions) {
-        const runnerExtension = value + extension;
-        const runnerRegExp = new RegExp(`${runnerExtension}$`);
+    for (const runnerExtension of runnerExtensions) {
+        const combinedExtension = runnerExtension + extension;
+        const runnerRegExp = new RegExp(`${combinedExtension}$`);
         if (value.match(runnerRegExp)) {
             return true;
         }

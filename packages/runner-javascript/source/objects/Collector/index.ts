@@ -1,6 +1,7 @@
 // #region imports
     // #region libraries
     import path from 'path';
+    import fs from 'fs';
     // #endregion libraries
 
 
@@ -37,8 +38,18 @@ class Collector {
 
 
     public async collect() {
-        const runnerFiles: string[] = [];
+        const runnersStats = fs.statSync(this.runnersPath);
+        if (runnersStats.isFile()) {
+            if (isRunnerFile(this.runnersPath)) {
+                return [
+                    this.runnersPath,
+                ];
+            }
 
+            return [];
+        }
+
+        const runnerFiles: string[] = [];
         for await (const file of getFiles(this.runnersPath)) {
             if (isRunnerFile(file)) {
                 runnerFiles.push(file);

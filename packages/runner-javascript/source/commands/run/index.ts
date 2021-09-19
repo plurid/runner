@@ -7,8 +7,8 @@
 
 
 // #region module
-const run = async (
-    runPath: string | undefined,
+const collectAndRun = async (
+    runPath?: string,
 ) => {
     try {
         const collector = new Collector(
@@ -30,6 +30,20 @@ const run = async (
     } catch (error) {
         console.log(`\n\tcould not read runs in '${runPath}'\n`, error);
         return;
+    }
+}
+
+
+const run = async (
+    runPaths: string[],
+) => {
+    if (runPaths.length === 0) {
+        collectAndRun();
+        return;
+    }
+
+    for (const runPath of runPaths) {
+        collectAndRun(runPath);
     }
 }
 // #endregion module
