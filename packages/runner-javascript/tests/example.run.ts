@@ -6,20 +6,36 @@ import runner, {
 
 
 
-const prepare: RunnerPrepare = async (
+interface Prepared {
+    prepareData: boolean;
+}
+interface Runned {
+    runData: boolean;
+}
+
+
+const prepare: RunnerPrepare<Prepared> = async (
     check,
 ) => {
     check('works', true, true);
+
+    return {
+        prepareData: true
+    };
 }
 
-const run: RunnerRun = async (
+const run: RunnerRun<Prepared, Runned> = async (
     check,
     prepared,
 ) => {
     check('works', true, true);
+
+    return {
+        runData: false,
+    };
 }
 
-const postpare: RunnerPostpare = async (
+const postpare: RunnerPostpare<Prepared, Runned> = async (
     check,
     prepared,
     runned,
