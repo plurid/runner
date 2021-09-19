@@ -8,7 +8,8 @@
 
     // #region external
     import {
-        esrunPath,
+        ESRUN_PATH,
+        EXTENSION_TYPESCRIPT,
     } from '~data/constants';
 
     import Collector from '~objects/Collector';
@@ -30,9 +31,9 @@ const collectAndRun = async (
 
         for (const runner of runners) {
             try {
-                if (runner.endsWith('.ts')) {
+                if (runner.endsWith(EXTENSION_TYPESCRIPT)) {
                     const esrun = exec(
-                        `${esrunPath} ${runner}`,
+                        `${ESRUN_PATH} ${runner}`,
                     );
                     esrun.stdout?.on('data', (data) => {
                         console.log(data);

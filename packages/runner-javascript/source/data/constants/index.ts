@@ -9,15 +9,18 @@
 // #region module
 export const VERSION = process.env.RUNNER_VERSION || '0';
 
-export const esrunPath = path.join(
+export const ESRUN_PATH = path.join(
     __dirname,
     '../node_modules/.bin/esrun',
 );
 
 
+export const EXTENSION_TYPESCRIPT = '.ts';
+export const EXTENSION_JAVASCRIPT = '.js';
+
 export const fileExtensions = [
-    '.ts',
-    '.js',
+    EXTENSION_TYPESCRIPT,
+    EXTENSION_JAVASCRIPT,
 ];
 
 export const runnerExtensions = [
