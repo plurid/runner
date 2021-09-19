@@ -11,7 +11,7 @@ export const VERSION = process.env.RUNNER_VERSION || '0';
 
 export const esrunPath = path.join(
     __dirname,
-    process.env.ESRUN_PATH || '',
+    '../node_modules/.bin/esrun',
 );
 
 
