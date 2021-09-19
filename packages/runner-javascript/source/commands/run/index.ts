@@ -19,7 +19,13 @@ const collectAndRun = async (
 
         for (const runner of runners) {
             try {
-                require(runner);
+                if (runner.endsWith('.ts')) {
+                    // run .ts
+                } else {
+                    require(
+                        runner,
+                    );
+                }
             } catch (error) {
                 console.log(`\n\tcould not evaluate run in '${runner}'\n`, error);
                 continue;

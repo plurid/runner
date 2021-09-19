@@ -24,6 +24,11 @@ export const RED_BACKGROUND = '\x1b[41m%s\x1b[0m';
 export const VERSION = '0.0.0-5';
 
 
+export const fileExtensions = [
+    // '.ts',
+    '.js',
+];
+
 export const runnerExtensions = [
     '.runner',
     '.run',

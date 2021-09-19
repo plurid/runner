@@ -6,6 +6,7 @@
 
     // #region external
     import {
+        fileExtensions,
         runnerExtensions,
     } from '~data/constants';
     // #endregion external
@@ -18,6 +19,9 @@ export const isRunnerFile = (
     value: string,
 ) => {
     const extension = path.extname(value);
+    if (!fileExtensions.includes(extension)) {
+        return false;
+    }
 
     for (const runnerExtension of runnerExtensions) {
         const combinedExtension = runnerExtension + extension;
