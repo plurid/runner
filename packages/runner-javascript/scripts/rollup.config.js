@@ -1,5 +1,6 @@
 // #region imports
     // #region libraries
+    import replace from '@rollup/plugin-replace';
     import json from '@rollup/plugin-json';
     import commonjs from '@rollup/plugin-commonjs';
     import ttypescript from 'ttypescript';
@@ -16,8 +17,20 @@
 
 
 // #region module
+const production = process.env.NODE_ENV === 'production';
+
+
 const common = {
     plugins: [
+        replace(
+            {
+                preventAssignment: true,
+                'process.env.ESRUN_PATH': production
+                    ? `'../../.bin/esrun'`
+                    : `'../node_modules/.bin/esrun'`,
+                'process.env.RUNNER_VERSION': `'${pkg.version}'`,
+            },
+        ),
         json(),
         commonjs(),
         typescript({
@@ -32,7 +45,7 @@ const common = {
                 beautify: true,
                 comments: false,
             },
-        }),,
+        }),
     ],
 };
 
@@ -52,7 +65,9 @@ const cli = {
         'fs',
         'child_process',
 
+        '@balsamic/esrun',
         'commander',
+        'esbuild',
     ],
     plugins: [
         ...common.plugins,
