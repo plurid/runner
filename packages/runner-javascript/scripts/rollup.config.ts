@@ -1,8 +1,9 @@
 // #region imports
     // #region libraries
-    import commonjs from '@rollup/plugin-commonjs';
-    import typescript from 'rollup-plugin-typescript2';
     import json from '@rollup/plugin-json';
+    import commonjs from '@rollup/plugin-commonjs';
+    import ttypescript from 'ttypescript';
+    import typescript from 'rollup-plugin-typescript2';
     import { terser } from 'rollup-plugin-terser';
     // #endregion libraries
 
@@ -20,7 +21,9 @@ const common = {
         json(),
         commonjs(),
         typescript({
-            tsconfig: './tsconfig.json',
+            typescript: ttypescript,
+            rollupCommonJSResolveHack: true,
+            clean: true,
         }),
         terser({
             mangle: false,

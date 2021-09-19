@@ -6,7 +6,7 @@
         "lib": ["ES6", "DOM", "DOM.Iterable", "ES2016", "ES2017"],
         "jsx": "react",
 
-        "outDir": "build",
+        "outDir": "distribution",
         "typeRoots": [
             "node_modules/@types",
         ],
@@ -55,7 +55,18 @@
         "noUnusedParameters": false,
 
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true
+        "emitDecoratorMetadata": true,
+
+        "plugins": [
+            {
+                "transform": "typescript-transform-paths",
+                "afterDeclarations": true,
+            },
+            {
+                "transform": "@zerollup/ts-transform-paths",
+                "exclude": ["*"]
+            }
+        ]
     },
     "include": [
         "source"
