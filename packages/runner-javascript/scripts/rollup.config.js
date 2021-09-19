@@ -17,17 +17,11 @@
 
 
 // #region module
-const production = process.env.NODE_ENV === 'production';
-
-
 const common = {
     plugins: [
         replace(
             {
                 preventAssignment: true,
-                'process.env.ESRUN_PATH': production
-                    ? `'../../.bin/esrun'`
-                    : `'../node_modules/.bin/esrun'`,
                 'process.env.RUNNER_VERSION': `'${pkg.version}'`,
             },
         ),
