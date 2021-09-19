@@ -1,5 +1,16 @@
 // #region imports
+    // #region libraries
+    import {
+        exec,
+    } from 'child_process';
+    // #endregion libraries
+
+
     // #region external
+    import {
+        esrunPath,
+    } from '~data/constants';
+
     import Collector from '~objects/Collector';
     // #endregion external
 // #endregion imports
@@ -20,7 +31,12 @@ const collectAndRun = async (
         for (const runner of runners) {
             try {
                 if (runner.endsWith('.ts')) {
-                    // run .ts
+                    const esrun = exec(
+                        `${esrunPath} ${runner}`,
+                    );
+                    esrun.stdout?.on('data', (data) => {
+                        console.log(data);
+                    });
                 } else {
                     require(
                         runner,

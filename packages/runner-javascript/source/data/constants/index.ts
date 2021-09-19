@@ -1,9 +1,22 @@
+// #region imports
+    // #region libraries
+    import path from 'path';
+    // #endregion libraries
+// #endregion imports
+
+
+
 // #region module
-export const VERSION = '0.0.0-6';
+export const VERSION = process.env.RUNNER_VERSION || '0';
+
+export const esrunPath = path.join(
+    __dirname,
+    process.env.ESRUN_PATH || '',
+);
 
 
 export const fileExtensions = [
-    // '.ts',
+    '.ts',
     '.js',
 ];
 
