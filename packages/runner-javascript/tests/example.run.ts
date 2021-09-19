@@ -7,20 +7,22 @@ import runner, {
 
 
 interface Prepared {
-    prepareData: boolean;
+    data: boolean;
 }
 interface Runned {
-    runData: boolean;
+    data: boolean;
 }
 
 
 const prepare: RunnerPrepare<Prepared> = async (
     check,
 ) => {
-    check('example · works', true, true);
+    const data = Math.random() < 0.5;
+
+    check('example · works', data, true);
 
     return {
-        prepareData: true
+        data,
     };
 }
 
@@ -28,10 +30,10 @@ const run: RunnerRun<Prepared, Runned> = async (
     check,
     prepared,
 ) => {
-    check('example · works', true, true);
+    check('example · works', prepared.data, true);
 
     return {
-        runData: false,
+        data: false,
     };
 }
 
@@ -40,7 +42,14 @@ const postpare: RunnerPostpare<Prepared, Runned> = async (
     prepared,
     runned,
 ) => {
-    check('example · works', true, true);
+    check('example · works', prepared.data, true);
+    const passed = check('example · works', runned.data, true);
+
+    if (passed) {
+        // passed action
+    } else {
+        // not passed action
+    }
 }
 
 
